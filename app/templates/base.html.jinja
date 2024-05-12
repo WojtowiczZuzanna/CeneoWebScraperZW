@@ -3,13 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{(url_for('static', filename='style.css'))}">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
     <title>Ceneo.pl Web Scraper</title>
 </head>
 <body>
     <header>
         <h1>Ceneo.pl Web Scraper</h1>
     </header>
+    <ul>
+        <li><a href="index">Index</a></li>
+        <li><a href="author">Author</a></li>
+        <li><a href="extract">Extract</a></li>
+        <li><a href="product">Product</a></li>
+        <li><a href="products">Products</a></li>
+    </ul>
     <section>
         {% block content %}
             <p>To jest plik bazowy</p>
