@@ -11,11 +11,11 @@
         <h1>Ceneo.pl Web Scraper</h1>
     </header>
     <ul>
-        <li><a href="index">Index</a></li>
-        <li><a href="author">Author</a></li>
-        <li><a href="extract">Extract</a></li>
+        <li><a href="{{url_for('index')}}">Index</a></li>
+        <li><a href="{{url_for('extract')}}">Extract</a></li>
         <li><a href="product">Product</a></li>
-        <li><a href="products">Products</a></li>
+        <li><a href="{{url_for('products')}}">Products</a></li>
+        <li><a href="{{url_for('author')}}">Author</a></li>
     </ul>
     <section>
         {% block content %}
