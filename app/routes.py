@@ -1,7 +1,7 @@
 from app import app
 from app import utils
 import pandas as pd 
-import numpy
+import numpy as np
 import requests
 import json
 import os
@@ -21,7 +21,7 @@ def extract():
         response = requests.get(url)
         if response.status_code == requests.codes['ok']:
             page_dom = BeautifulSoup(response.text, 'html.parser')
-            opinions_count = utils.extract(page_dom.select_one("a.product-review__link > span"))
+            opinions_count = utils.extract(page_dom,"a.product-review__link > span")
             if opinions_count:
                 url = f"https://www.ceneo.pl/{product_id}/opinie-1"
                 all_opinions = []
@@ -32,7 +32,7 @@ def extract():
                     for opinion in opinions:                             
                         single_opinion = {
                             key: utils.extract(opinion, *value)
-                                for key, value in selectors.items()
+                                for key, value in utils.selectors.items()
                         }
                         all_opinions.append(single_opinion)
                         
@@ -40,6 +40,8 @@ def extract():
                         url = "https://www.ceneo.pl"+utils.extract(page_dom, "a.pagination__next", "href")
                     except TypeError: 
                         url = None
+                    if not os.path.exists("app/data"):
+                        os.mkdir("app/data")
                     if not os.path.exists("app/data/opinions"):
                         os.mkdir("app/data/opinions")
                     with open(f"app/data/opinions/{product_id}.json", "w", encoding = "UTF-8") as jf:
