@@ -3,5 +3,41 @@
     Lista produktów
 {% endblock title %}
 {% block content %}
-    <p>{{products}}</p>
+<div class="container">
+    {% for product in products %}
+        <p>{{product}}</p>
+    {% endfor %}
+</div>
+
+    <table id="table">
+        <thead>
+            <tr>
+                <th>Product_Name</th>
+                <th>Product_ ID</th>
+                <th>Opinions</th>
+                <th>Pros</th>
+                <th>Cons</th>
+                <th>Average_Rating</th>
+                <th>JSON File</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td><a class="product-link" href="{{url_for('product', product_id=product.product_id)}}" style="color: black">{{product.product_name}}</a></td>
+                <td>{{product.product_id}}</td>
+                <td>{{product.opinions_count}}</td>
+                <td>{{product.pros_count}}</td>
+                <td>{{product.cons_count}}</td>
+                <td>{{product.avg_rating}}</td>
+                <td><a class="btn btn-primary" href="{{url_for('download_json', product_id=product.product_id)}}" role="button">Download JSON</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
 {% endblock content %}
+<br><p>
+
+
+</p><br>

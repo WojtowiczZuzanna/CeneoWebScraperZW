@@ -4,4 +4,47 @@
 {% endblock title %}
 {% block content %}
     <p>To jest strona z opiniami o produkcie {{product_id}}</p>
+
+    <table id="table">
+        <thead>
+            <tr>
+            <th scope="col">Id_opinii</th>
+            <th scope="col">Author</th>
+            <th scope="col">Recommendation</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Content</th>
+            <th scope="col">Pros</th>
+            <th scope="col">Cons</th>
+            <th scope="col">Useful</th>
+            <th scope="col">Useless</th>
+            <th scope="col">Publish_date</th>
+            <th scope="col">Purchase_date</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for opinion in opinions %}
+            <tr>
+            <td>{{opinion.opinion_id}}</td>
+            <td>{{opinion.author}}</td>
+            <td>{{opinion.recommendation}}</td>
+            <td>{{opinion.rating}}</td>
+            <td>{{opinion.content}}</td>
+            <td> 
+                {% for pros in opinion.pros %}
+                    <p>{{pros}}</p>
+                {% endfor %}
+            </td>
+            <td>
+            {% for cons in opinion.cons %}
+                <p>{{cons}}</p>
+                {% endfor %}
+            </td>
+            <td>{{opinion.useful}}</td>
+            <td>{{opinion.useless}}</td>
+            <td>{{opinion.publish_date}}</td>
+            <td>{{opinion.purchase_date}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock content %}

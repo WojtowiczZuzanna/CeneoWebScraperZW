@@ -72,7 +72,7 @@ def extract():
 @app.route('/products')
 def products():
     products_list= [filename.split(".")[0] for filename in os.listdir("app/data/opinions")]
-    product = []
+    products = []
     for product_id in products_list:
         with open(f"app/data/products/{product_id}.json", "r", encoding = "UTF-8") as jf:
             products.append(json.load(jf))
@@ -84,7 +84,10 @@ def author():
 
 @app.route("/product/<product_id>")
 def product(product_id):
-    return render_template("product.html.jinja", product_id = product_id)
+    with open(f"app/data/products/{product_id}.json", "r", encoding="UTF-8") as jf:
+        data = json.load(jf)
+        data_df = pd.Data.Frame(data)
+    return render_template("product.html.jinja", product_id = product_id, d=data_df.to_html(classes='table table-striped', index=False))
 
 @app.route("/product/download_json/<product_id>")
 def download_json(product_id):
